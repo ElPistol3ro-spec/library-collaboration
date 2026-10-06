@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>The Elv & Co. Library </h1>
+    </header>
+
+    <main class="container">
+        <nav class="sidebar">
+            <button onclick="showSection('inventory-sec')">Manage Inventory</button>
+            <button onclick="showSection('search-sec')">Search Books</button>
+            <button onclick="showSection('borrow-sec')">Borrow / Return</button>
+            <button onclick="showSection('reports-sec')">View Reports</button>
+        </nav>
+
+        <section class="content">
+            <!-- Alert Log -->
+            <div id="alert-box" class="alert hidden"></div>
+
+            <!-- Inventory Section -->
+            <div id="inventory-sec" class="section">
+                <h2>Add New Book</h2>
+                <form id="book-form">
+                    <input type="text" id="book-id" placeholder="Book ID (e.g., B001)" required>
+                    <input type="text" id="book-title" placeholder="Title" required>
+                    <input type="text" id="book-author" placeholder="Author" required>
+                    <input type="number" id="book-copies" placeholder="Total Copies" min="1" required>
+                    <button type="submit">Add Book</button>
+                </form>
+            </div>
+
+            <!-- Search Section -->
+            <div id="search-sec" class="section hidden">
+                <h2>Search Inventory</h2>
+                <input type="text" id="search-query" placeholder="Type title or author..." oninput="handleSearch()">
+                <ul id="search-results" class="list-group"></ul>
+            </div>
+
+            <!-- Borrow / Return Section -->
+            <div id="borrow-sec" class="section hidden">
+                <h2>Transactions</h2>
+                <div class="form-group">
+                    <h3>Check Out Book</h3>
+                    <input type="text" id="borrow-user" placeholder="User ID">
+                    <input type="text" id="borrow-id" placeholder="Book ID">
+                    <input type="date" id="borrow-due">
+                    <button onclick="handleBorrow()">Check Out</button>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <h3>Return Book</h3>
+                    <input type="text" id="return-user" placeholder="User ID">
+                    <input type="text" id="return-id" placeholder="Book ID">
+                    <button onclick="handleReturn()">Return</button>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports-sec" class="section hidden">
+                <h2>System Reports</h2>
+                <button onclick="updateReports()">Refresh Reports</button>
+                
+                <h3>Active Loans</h3>
+                <ul id="active-loans-list" class="list-group"></ul>
+
+                <h3>Overdue Books</h3>
+                <ul id="overdue-loans-list" class="list-group alert-list"></ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.jss"></script>
+</body>
+</html>
+
